@@ -1,0 +1,6 @@
+-/build
+-/src/analizador/lexico.h
+-/src/analizador/lexico.c
+-/src/analizador/sintactico.h
+-/src/analizador/sintactico.c
+-/src/analizador/sintactico.output

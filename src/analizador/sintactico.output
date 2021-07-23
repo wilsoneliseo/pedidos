@@ -1,0 +1,578 @@
+Grammar
+
+    0 $accept: Inicio $end
+
+    1 Inicio: HeaderS
+    2       | %empty
+
+    3 HeaderS: HeaderS Header
+    4        | Header
+
+    5 Header: H1 Estado ContenidoHeader ':' Etiquetas ':' RPROPERTIES ':' ':' RCREATED ':' Fecha ':' REND ':'
+    6       | H1 RDONE ContenidoHeader ':' Etiquetas RCLOSED ':' Fecha ':' RPROPERTIES ':' ':' RCREATED ':' Fecha ':' REND ':'
+
+    7 Fecha: '[' NUMERO '-' NUMERO '-' NUMERO IDENTIFICADOR NUMERO ':' NUMERO ']'
+
+    8 Etiquetas: Etiquetas IDENTIFICADOR ':'
+    9          | IDENTIFICADOR ':'
+
+   10 Estado: RTODO
+   11       | REMPA
+   12       | RNEXT
+
+   13 ContenidoHeader: ContenidoHeader Algo
+   14                | Algo
+
+   15 Algo: IDENTIFICADOR
+   16     | ','
+   17     | '.'
+   18     | '/'
+   19     | NUMERO
+
+
+Terminals, with rules where they appear
+
+$end (0) 0
+',' (44) 16
+'-' (45) 7
+'.' (46) 17
+'/' (47) 18
+':' (58) 5 6 7 8 9
+'[' (91) 7
+']' (93) 7
+error (256)
+H1 (258) 5 6
+RPROPERTIES (259) 5 6
+RCREATED (260) 5 6
+RCLOSED (261) 6
+REND (262) 5 6
+NUMERO (263) 7 19
+IDENTIFICADOR (264) 7 8 9 15
+RTODO (265) 10
+RDONE (266) 6
+REMPA (267) 11
+RNEXT (268) 12
+
+
+Nonterminals, with rules where they appear
+
+$accept (21)
+    on left: 0
+Inicio (22)
+    on left: 1 2, on right: 0
+HeaderS (23)
+    on left: 3 4, on right: 1 3
+Header (24)
+    on left: 5 6, on right: 3 4
+Fecha (25)
+    on left: 7, on right: 5 6
+Etiquetas (26)
+    on left: 8 9, on right: 5 6 8
+Estado (27)
+    on left: 10 11 12, on right: 5
+ContenidoHeader (28)
+    on left: 13 14, on right: 5 6 13
+Algo (29)
+    on left: 15 16 17 18 19, on right: 13 14
+
+
+State 0
+
+    0 $accept: . Inicio $end
+
+    H1  shift, and go to state 1
+
+    $default  reduce using rule 2 (Inicio)
+
+    Inicio   go to state 2
+    HeaderS  go to state 3
+    Header   go to state 4
+
+
+State 1
+
+    5 Header: H1 . Estado ContenidoHeader ':' Etiquetas ':' RPROPERTIES ':' ':' RCREATED ':' Fecha ':' REND ':'
+    6       | H1 . RDONE ContenidoHeader ':' Etiquetas RCLOSED ':' Fecha ':' RPROPERTIES ':' ':' RCREATED ':' Fecha ':' REND ':'
+
+    RTODO  shift, and go to state 5
+    RDONE  shift, and go to state 6
+    REMPA  shift, and go to state 7
+    RNEXT  shift, and go to state 8
+
+    Estado  go to state 9
+
+
+State 2
+
+    0 $accept: Inicio . $end
+
+    $end  shift, and go to state 10
+
+
+State 3
+
+    1 Inicio: HeaderS .
+    3 HeaderS: HeaderS . Header
+
+    H1  shift, and go to state 1
+
+    $default  reduce using rule 1 (Inicio)
+
+    Header  go to state 11
+
+
+State 4
+
+    4 HeaderS: Header .
+
+    $default  reduce using rule 4 (HeaderS)
+
+
+State 5
+
+   10 Estado: RTODO .
+
+    $default  reduce using rule 10 (Estado)
+
+
+State 6
+
+    6 Header: H1 RDONE . ContenidoHeader ':' Etiquetas RCLOSED ':' Fecha ':' RPROPERTIES ':' ':' RCREATED ':' Fecha ':' REND ':'
+
+    NUMERO         shift, and go to state 12
+    IDENTIFICADOR  shift, and go to state 13
+    ','            shift, and go to state 14
+    '.'            shift, and go to state 15
+    '/'            shift, and go to state 16
+
+    ContenidoHeader  go to state 17
+    Algo             go to state 18
+
+
+State 7
+
+   11 Estado: REMPA .
+
+    $default  reduce using rule 11 (Estado)
+
+
+State 8
+
+   12 Estado: RNEXT .
+
+    $default  reduce using rule 12 (Estado)
+
+
+State 9
+
+    5 Header: H1 Estado . ContenidoHeader ':' Etiquetas ':' RPROPERTIES ':' ':' RCREATED ':' Fecha ':' REND ':'
+
+    NUMERO         shift, and go to state 12
+    IDENTIFICADOR  shift, and go to state 13
+    ','            shift, and go to state 14
+    '.'            shift, and go to state 15
+    '/'            shift, and go to state 16
+
+    ContenidoHeader  go to state 19
+    Algo             go to state 18
+
+
+State 10
+
+    0 $accept: Inicio $end .
+
+    $default  accept
+
+
+State 11
+
+    3 HeaderS: HeaderS Header .
+
+    $default  reduce using rule 3 (HeaderS)
+
+
+State 12
+
+   19 Algo: NUMERO .
+
+    $default  reduce using rule 19 (Algo)
+
+
+State 13
+
+   15 Algo: IDENTIFICADOR .
+
+    $default  reduce using rule 15 (Algo)
+
+
+State 14
+
+   16 Algo: ',' .
+
+    $default  reduce using rule 16 (Algo)
+
+
+State 15
+
+   17 Algo: '.' .
+
+    $default  reduce using rule 17 (Algo)
+
+
+State 16
+
+   18 Algo: '/' .
+
+    $default  reduce using rule 18 (Algo)
+
+
+State 17
+
+    6 Header: H1 RDONE ContenidoHeader . ':' Etiquetas RCLOSED ':' Fecha ':' RPROPERTIES ':' ':' RCREATED ':' Fecha ':' REND ':'
+   13 ContenidoHeader: ContenidoHeader . Algo
+
+    NUMERO         shift, and go to state 12
+    IDENTIFICADOR  shift, and go to state 13
+    ':'            shift, and go to state 20
+    ','            shift, and go to state 14
+    '.'            shift, and go to state 15
+    '/'            shift, and go to state 16
+
+    Algo  go to state 21
+
+
+State 18
+
+   14 ContenidoHeader: Algo .
+
+    $default  reduce using rule 14 (ContenidoHeader)
+
+
+State 19
+
+    5 Header: H1 Estado ContenidoHeader . ':' Etiquetas ':' RPROPERTIES ':' ':' RCREATED ':' Fecha ':' REND ':'
+   13 ContenidoHeader: ContenidoHeader . Algo
+
+    NUMERO         shift, and go to state 12
+    IDENTIFICADOR  shift, and go to state 13
+    ':'            shift, and go to state 22
+    ','            shift, and go to state 14
+    '.'            shift, and go to state 15
+    '/'            shift, and go to state 16
+
+    Algo  go to state 21
+
+
+State 20
+
+    6 Header: H1 RDONE ContenidoHeader ':' . Etiquetas RCLOSED ':' Fecha ':' RPROPERTIES ':' ':' RCREATED ':' Fecha ':' REND ':'
+
+    IDENTIFICADOR  shift, and go to state 23
+
+    Etiquetas  go to state 24
+
+
+State 21
+
+   13 ContenidoHeader: ContenidoHeader Algo .
+
+    $default  reduce using rule 13 (ContenidoHeader)
+
+
+State 22
+
+    5 Header: H1 Estado ContenidoHeader ':' . Etiquetas ':' RPROPERTIES ':' ':' RCREATED ':' Fecha ':' REND ':'
+
+    IDENTIFICADOR  shift, and go to state 23
+
+    Etiquetas  go to state 25
+
+
+State 23
+
+    9 Etiquetas: IDENTIFICADOR . ':'
+
+    ':'  shift, and go to state 26
+
+
+State 24
+
+    6 Header: H1 RDONE ContenidoHeader ':' Etiquetas . RCLOSED ':' Fecha ':' RPROPERTIES ':' ':' RCREATED ':' Fecha ':' REND ':'
+    8 Etiquetas: Etiquetas . IDENTIFICADOR ':'
+
+    RCLOSED        shift, and go to state 27
+    IDENTIFICADOR  shift, and go to state 28
+
+
+State 25
+
+    5 Header: H1 Estado ContenidoHeader ':' Etiquetas . ':' RPROPERTIES ':' ':' RCREATED ':' Fecha ':' REND ':'
+    8 Etiquetas: Etiquetas . IDENTIFICADOR ':'
+
+    IDENTIFICADOR  shift, and go to state 28
+    ':'            shift, and go to state 29
+
+
+State 26
+
+    9 Etiquetas: IDENTIFICADOR ':' .
+
+    $default  reduce using rule 9 (Etiquetas)
+
+
+State 27
+
+    6 Header: H1 RDONE ContenidoHeader ':' Etiquetas RCLOSED . ':' Fecha ':' RPROPERTIES ':' ':' RCREATED ':' Fecha ':' REND ':'
+
+    ':'  shift, and go to state 30
+
+
+State 28
+
+    8 Etiquetas: Etiquetas IDENTIFICADOR . ':'
+
+    ':'  shift, and go to state 31
+
+
+State 29
+
+    5 Header: H1 Estado ContenidoHeader ':' Etiquetas ':' . RPROPERTIES ':' ':' RCREATED ':' Fecha ':' REND ':'
+
+    RPROPERTIES  shift, and go to state 32
+
+
+State 30
+
+    6 Header: H1 RDONE ContenidoHeader ':' Etiquetas RCLOSED ':' . Fecha ':' RPROPERTIES ':' ':' RCREATED ':' Fecha ':' REND ':'
+
+    '['  shift, and go to state 33
+
+    Fecha  go to state 34
+
+
+State 31
+
+    8 Etiquetas: Etiquetas IDENTIFICADOR ':' .
+
+    $default  reduce using rule 8 (Etiquetas)
+
+
+State 32
+
+    5 Header: H1 Estado ContenidoHeader ':' Etiquetas ':' RPROPERTIES . ':' ':' RCREATED ':' Fecha ':' REND ':'
+
+    ':'  shift, and go to state 35
+
+
+State 33
+
+    7 Fecha: '[' . NUMERO '-' NUMERO '-' NUMERO IDENTIFICADOR NUMERO ':' NUMERO ']'
+
+    NUMERO  shift, and go to state 36
+
+
+State 34
+
+    6 Header: H1 RDONE ContenidoHeader ':' Etiquetas RCLOSED ':' Fecha . ':' RPROPERTIES ':' ':' RCREATED ':' Fecha ':' REND ':'
+
+    ':'  shift, and go to state 37
+
+
+State 35
+
+    5 Header: H1 Estado ContenidoHeader ':' Etiquetas ':' RPROPERTIES ':' . ':' RCREATED ':' Fecha ':' REND ':'
+
+    ':'  shift, and go to state 38
+
+
+State 36
+
+    7 Fecha: '[' NUMERO . '-' NUMERO '-' NUMERO IDENTIFICADOR NUMERO ':' NUMERO ']'
+
+    '-'  shift, and go to state 39
+
+
+State 37
+
+    6 Header: H1 RDONE ContenidoHeader ':' Etiquetas RCLOSED ':' Fecha ':' . RPROPERTIES ':' ':' RCREATED ':' Fecha ':' REND ':'
+
+    RPROPERTIES  shift, and go to state 40
+
+
+State 38
+
+    5 Header: H1 Estado ContenidoHeader ':' Etiquetas ':' RPROPERTIES ':' ':' . RCREATED ':' Fecha ':' REND ':'
+
+    RCREATED  shift, and go to state 41
+
+
+State 39
+
+    7 Fecha: '[' NUMERO '-' . NUMERO '-' NUMERO IDENTIFICADOR NUMERO ':' NUMERO ']'
+
+    NUMERO  shift, and go to state 42
+
+
+State 40
+
+    6 Header: H1 RDONE ContenidoHeader ':' Etiquetas RCLOSED ':' Fecha ':' RPROPERTIES . ':' ':' RCREATED ':' Fecha ':' REND ':'
+
+    ':'  shift, and go to state 43
+
+
+State 41
+
+    5 Header: H1 Estado ContenidoHeader ':' Etiquetas ':' RPROPERTIES ':' ':' RCREATED . ':' Fecha ':' REND ':'
+
+    ':'  shift, and go to state 44
+
+
+State 42
+
+    7 Fecha: '[' NUMERO '-' NUMERO . '-' NUMERO IDENTIFICADOR NUMERO ':' NUMERO ']'
+
+    '-'  shift, and go to state 45
+
+
+State 43
+
+    6 Header: H1 RDONE ContenidoHeader ':' Etiquetas RCLOSED ':' Fecha ':' RPROPERTIES ':' . ':' RCREATED ':' Fecha ':' REND ':'
+
+    ':'  shift, and go to state 46
+
+
+State 44
+
+    5 Header: H1 Estado ContenidoHeader ':' Etiquetas ':' RPROPERTIES ':' ':' RCREATED ':' . Fecha ':' REND ':'
+
+    '['  shift, and go to state 33
+
+    Fecha  go to state 47
+
+
+State 45
+
+    7 Fecha: '[' NUMERO '-' NUMERO '-' . NUMERO IDENTIFICADOR NUMERO ':' NUMERO ']'
+
+    NUMERO  shift, and go to state 48
+
+
+State 46
+
+    6 Header: H1 RDONE ContenidoHeader ':' Etiquetas RCLOSED ':' Fecha ':' RPROPERTIES ':' ':' . RCREATED ':' Fecha ':' REND ':'
+
+    RCREATED  shift, and go to state 49
+
+
+State 47
+
+    5 Header: H1 Estado ContenidoHeader ':' Etiquetas ':' RPROPERTIES ':' ':' RCREATED ':' Fecha . ':' REND ':'
+
+    ':'  shift, and go to state 50
+
+
+State 48
+
+    7 Fecha: '[' NUMERO '-' NUMERO '-' NUMERO . IDENTIFICADOR NUMERO ':' NUMERO ']'
+
+    IDENTIFICADOR  shift, and go to state 51
+
+
+State 49
+
+    6 Header: H1 RDONE ContenidoHeader ':' Etiquetas RCLOSED ':' Fecha ':' RPROPERTIES ':' ':' RCREATED . ':' Fecha ':' REND ':'
+
+    ':'  shift, and go to state 52
+
+
+State 50
+
+    5 Header: H1 Estado ContenidoHeader ':' Etiquetas ':' RPROPERTIES ':' ':' RCREATED ':' Fecha ':' . REND ':'
+
+    REND  shift, and go to state 53
+
+
+State 51
+
+    7 Fecha: '[' NUMERO '-' NUMERO '-' NUMERO IDENTIFICADOR . NUMERO ':' NUMERO ']'
+
+    NUMERO  shift, and go to state 54
+
+
+State 52
+
+    6 Header: H1 RDONE ContenidoHeader ':' Etiquetas RCLOSED ':' Fecha ':' RPROPERTIES ':' ':' RCREATED ':' . Fecha ':' REND ':'
+
+    '['  shift, and go to state 33
+
+    Fecha  go to state 55
+
+
+State 53
+
+    5 Header: H1 Estado ContenidoHeader ':' Etiquetas ':' RPROPERTIES ':' ':' RCREATED ':' Fecha ':' REND . ':'
+
+    ':'  shift, and go to state 56
+
+
+State 54
+
+    7 Fecha: '[' NUMERO '-' NUMERO '-' NUMERO IDENTIFICADOR NUMERO . ':' NUMERO ']'
+
+    ':'  shift, and go to state 57
+
+
+State 55
+
+    6 Header: H1 RDONE ContenidoHeader ':' Etiquetas RCLOSED ':' Fecha ':' RPROPERTIES ':' ':' RCREATED ':' Fecha . ':' REND ':'
+
+    ':'  shift, and go to state 58
+
+
+State 56
+
+    5 Header: H1 Estado ContenidoHeader ':' Etiquetas ':' RPROPERTIES ':' ':' RCREATED ':' Fecha ':' REND ':' .
+
+    $default  reduce using rule 5 (Header)
+
+
+State 57
+
+    7 Fecha: '[' NUMERO '-' NUMERO '-' NUMERO IDENTIFICADOR NUMERO ':' . NUMERO ']'
+
+    NUMERO  shift, and go to state 59
+
+
+State 58
+
+    6 Header: H1 RDONE ContenidoHeader ':' Etiquetas RCLOSED ':' Fecha ':' RPROPERTIES ':' ':' RCREATED ':' Fecha ':' . REND ':'
+
+    REND  shift, and go to state 60
+
+
+State 59
+
+    7 Fecha: '[' NUMERO '-' NUMERO '-' NUMERO IDENTIFICADOR NUMERO ':' NUMERO . ']'
+
+    ']'  shift, and go to state 61
+
+
+State 60
+
+    6 Header: H1 RDONE ContenidoHeader ':' Etiquetas RCLOSED ':' Fecha ':' RPROPERTIES ':' ':' RCREATED ':' Fecha ':' REND . ':'
+
+    ':'  shift, and go to state 62
+
+
+State 61
+
+    7 Fecha: '[' NUMERO '-' NUMERO '-' NUMERO IDENTIFICADOR NUMERO ':' NUMERO ']' .
+
+    $default  reduce using rule 7 (Fecha)
+
+
+State 62
+
+    6 Header: H1 RDONE ContenidoHeader ':' Etiquetas RCLOSED ':' Fecha ':' RPROPERTIES ':' ':' RCREATED ':' Fecha ':' REND ':' .
+
+    $default  reduce using rule 6 (Header)

@@ -1,0 +1,21 @@
+* Estructuras de archivos
+El programa se llama /pedidos/, una aplicación de comandos para
+formatear archivos =org= a =pdf= ordenando la información de acuerdo a
+las etiquetas indicadas en el archivo =instrucciones.txt= cuyo
+contenido es volcado a memoria para elaborar la salida. Se llama
+pedidos porque su programacion inicialmente es ordenar pedidos con
+nombre del cliente y producto como etiquetas en un archivo =org= de
+entrada.
+
+* Construir
+#+BEGIN_SRC sh
+$mkdir build
+$cd build
+$cmake ..
+$make
+#+END_SRC
+
+* Correr
+#+BEGIN_SRC sh
+$./pedidos <Archivo org>
+#+END_SRC
