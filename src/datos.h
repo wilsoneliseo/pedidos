@@ -1,9 +1,7 @@
 #ifndef DATOS_H
 #define DATOS_H
 
-#include <gmodule.h>
-
-GHashTable *clientes = NULL;
+#include<global.h>
 
 void           
 agregar_pedido(int tk, GString * contenido_header, GSList * etiquetas);

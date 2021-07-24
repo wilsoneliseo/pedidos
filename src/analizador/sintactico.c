@@ -117,6 +117,7 @@ extern int yydebug;
   
   int analizar(char * source);
   void analizar_archivo(const char * path);
+  void agregar_pedido(int tk, GString * contenido_header, GSList * etiquetas);
 
 
 
@@ -494,9 +495,9 @@ static const yytype_uint8 yytranslate[] =
   /* YYRLINE[YYN] -- Source line where rule number YYN was defined.  */
 static const yytype_uint8 yyrline[] =
 {
-       0,   103,   103,   104,   108,   109,   113,   118,   126,   130,
-     131,   135,   136,   137,   141,   142,   145,   146,   147,   148,
-     149
+       0,   106,   106,   107,   111,   112,   116,   121,   129,   133,
+     134,   138,   139,   140,   144,   145,   148,   149,   150,   151,
+     152
 };
 #endif
 
@@ -1226,7 +1227,9 @@ yyparse (void)
    yylineno = 1;
 
    yylloc.first_line = yylloc.last_line=1;
-   yylloc.first_column = yylloc.last_column=1;   
+   yylloc.first_column = yylloc.last_column=1;
+   void cargar_clientes();
+   cargar_clientes();
 }
 
 

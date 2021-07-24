@@ -41,6 +41,7 @@
   
   int analizar(char * source);
   void analizar_archivo(const char * path);
+  void agregar_pedido(int tk, GString * contenido_header, GSList * etiquetas);
 }
 
 /* El codigo dentro de la directiva debe corresponder a definiciones y
@@ -72,7 +73,9 @@
    yylineno = 1;
 
    yylloc.first_line = yylloc.last_line=1;
-   yylloc.first_column = yylloc.last_column=1;   
+   yylloc.first_column = yylloc.last_column=1;
+   void cargar_clientes();
+   cargar_clientes();
 };
 
 

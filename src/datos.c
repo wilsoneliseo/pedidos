@@ -23,7 +23,6 @@ g_string_replace (GString *string, const gchar *find, const gchar *replace){
     g_strfreev(split);		  
 }
 
-
 void
 cargar_clientes(){
   clientes = g_hash_table_new(g_str_hash, g_str_equal);
@@ -50,5 +49,5 @@ cargar_clientes(){
   g_hash_table_insert(clientes, "tujal", NULL);
   g_hash_table_insert(clientes, "cristina", NULL);
   g_hash_table_insert(clientes, "elvis", NULL);
-  
+  printf("Se cargaron los clientes\n");
 }

@@ -52,6 +52,7 @@ extern int yydebug;
   
   int analizar(char * source);
   void analizar_archivo(const char * path);
+  void agregar_pedido(int tk, GString * contenido_header, GSList * etiquetas);
 
 
 
